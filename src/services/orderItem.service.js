@@ -1,5 +1,31 @@
 import pool from "../config/db.js";
 
+//Helper function to update order totals
+export const updateOrderTotal = async (orderId) => {
+  //Calculate total
+  const totalResult = await pool.query(
+    `
+            SELECT
+      COALESCE(SUM(quantity_ordered * unit_price), 0) AS total
+    FROM order_items
+    WHERE order_id = $1
+
+        `,
+    [orderId],
+  );
+
+  const total = totalResult.rows[0].total;
+
+  //update order
+  await pool.query(
+    `
+    UPDATE orders
+    SET total_amount=$1
+    WHERE order_id=$2`,
+    [total, orderId],
+  );
+};
+
 export const getOrderItems = async () => {
   const result = await pool.query(`SELECT * FROM order_items`);
 
@@ -32,7 +58,11 @@ export const addOrderItem = async (orderItem) => {
     ],
   );
 
-  return result.rows[0];
+  const orderItem = result.rows[0];
+
+  await updateOrderTotal(orderItem.order_id);
+
+  return orderItem;
 };
 
 export const updateOrderItem = async (id, orderItem) => {
@@ -54,8 +84,11 @@ export const updateOrderItem = async (id, orderItem) => {
       id,
     ],
   );
+  const orderItem = result.rows[0];
 
-  return result.rows[0];
+  await updateOrderTotal(orderItem.order_id);
+
+  return orderItem;
 };
 
 export const deleteOrderItem = async (id) => {
@@ -67,6 +100,9 @@ export const deleteOrderItem = async (id) => {
         `,
     [id],
   );
+  const deletedItem = result.rows[0];
 
-  return result.rows[0];
+  await updateOrderTotal(deletedItem.order_id);
+
+  return deletedItem;
 };
