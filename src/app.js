@@ -1,0 +1,33 @@
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+
+import authRoutes from "./routes/auth.routes.js";
+import testRoutes from "./routes/test.routes.js";
+import supplierRoutes from "./routes/supplier.routes.js";
+import departmentRoutes from "./routes/department.routes.js";
+import itemRoutes from "./routes/item.routes.js";
+import inventoryRoutes from "./routes/inventory.routes.js"
+
+const app = express();
+
+app.use(cors());
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/test", testRoutes);
+app.use("/api/suppliers", supplierRoutes);
+app.use("/api/departments", departmentRoutes);
+app.use("/api/items", itemRoutes);
+app.use("/api/inventory", inventoryRoutes)
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Hospital Inventory API Running",
+  });
+});
+
+export default app;
