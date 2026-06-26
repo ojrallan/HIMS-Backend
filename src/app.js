@@ -9,6 +9,7 @@ import supplierRoutes from "./routes/supplier.routes.js";
 import departmentRoutes from "./routes/department.routes.js";
 import itemRoutes from "./routes/item.routes.js";
 import inventoryRoutes from "./routes/inventory.routes.js"
+import orderRoutes from "./routes/order.routes.js"
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/suppliers", supplierRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/inventory", inventoryRoutes)
+app.use("/api/orders", orderRoutes)
 
 app.get("/", (req, res) => {
   res.json({
