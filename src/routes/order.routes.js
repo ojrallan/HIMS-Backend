@@ -2,7 +2,7 @@ import express from "express";
 import * as orderController from "../controllers/order.controller.js";
 import auth from "../middleware/role.middleware.js";
 import authorize from "../middleware/role.middleware.js";
-import { createOrderValidation } from "../validators/order.validator.j";
+import { createOrderValidation } from "../validators/order.validator.js";
 import { validateRequest } from "../middleware/validate.middleware.js";
 
 const router = express.Router();
