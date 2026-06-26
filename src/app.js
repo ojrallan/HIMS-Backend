@@ -8,8 +8,9 @@ import testRoutes from "./routes/test.routes.js";
 import supplierRoutes from "./routes/supplier.routes.js";
 import departmentRoutes from "./routes/department.routes.js";
 import itemRoutes from "./routes/item.routes.js";
-import inventoryRoutes from "./routes/inventory.routes.js"
-import orderRoutes from "./routes/order.routes.js"
+import inventoryRoutes from "./routes/inventory.routes.js";
+import orderRoutes from "./routes/order.routes.js";
+import orderItemRoutes from "./routes/orderItem.routes.js";
 
 const app = express();
 
@@ -23,8 +24,9 @@ app.use("/api/test", testRoutes);
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/items", itemRoutes);
-app.use("/api/inventory", inventoryRoutes)
-app.use("/api/orders", orderRoutes)
+app.use("/api/inventory", inventoryRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/order-items", orderItemRoutes);
 
 app.get("/", (req, res) => {
   res.json({
