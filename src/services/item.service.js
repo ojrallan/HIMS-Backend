@@ -20,7 +20,7 @@ export const getAllItems = async () => {
 };
 
 export const getItemById = async (id) => {
-  const result = await pool.query(`SELECT * FROM items WHERE id=$1`, [id]);
+  const result = await pool.query(`SELECT * FROM items WHERE item_id=$1`, [id]);
   return result.rows[0];
 };
 
