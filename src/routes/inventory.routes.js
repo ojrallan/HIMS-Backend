@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/", auth, inventoryController.getAllInventory);
 
-router.get("/:id", auth, inventoryController.getAnInventory);
+router.get("/search", auth, inventoryController.searchInventory);
 
 router.get(
   "/expiring",
@@ -22,8 +22,7 @@ router.get(
   auth,
   authorize("Admin", "Inventory Manager", inventoryController.getLowStock),
 );
-
-router.get("/search", auth, inventoryController.searchInventory);
+router.get("/:inventoryId", auth, inventoryController.getAnInventory);
 
 router.patch(
   "/:id",
@@ -32,7 +31,7 @@ router.patch(
   inventoryController.updateInventoryStock,
 );
 router.patch(
-  "/reduce/:id",
+  "/reduce/:inventoryId",
   auth,
   authorize(
     "Admin",

@@ -17,11 +17,11 @@ export const getAnInventory = async (req, res) => {
 
     if (!inventory) {
       return res.status(404).json({
-        message: "Department not found",
+        message: "Inventory record not found",
       });
     }
 
-    res.json(department);
+    res.json(inventory);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -125,7 +125,7 @@ export const updateInventoryStock = async (req, res) => {
       quantity,
     );
 
-    if (!updateInventory) {
+    if (!updatedInventory) {
       return res.status(404).json({
         message: "Inventory item not found",
       });
@@ -133,7 +133,7 @@ export const updateInventoryStock = async (req, res) => {
 
     res.status(200).json({
       message: "Inventory updated successfully.",
-      inventory: updateInventory,
+      inventory: updatedInventory,
     });
   } catch (error) {
     console.error(error);

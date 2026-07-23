@@ -58,7 +58,7 @@ export const addOrderItem = async (orderItem) => {
     ],
   );
 
-  const orderItem = result.rows[0];
+ orderItem = result.rows[0];
 
   await updateOrderTotal(orderItem.order_id);
 
@@ -84,7 +84,7 @@ export const updateOrderItem = async (id, orderItem) => {
       id,
     ],
   );
-  const orderItem = result.rows[0];
+   orderItem = result.rows[0];
 
   await updateOrderTotal(orderItem.order_id);
 

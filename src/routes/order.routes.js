@@ -11,6 +11,13 @@ router.get("/", auth, orderController.getOrders);
 
 router.get("/:id", auth, orderController.getOrder);
 
+router.patch(
+  "/:id/receive",
+  auth,
+  authorize("Admin", "Inventory Manager"),
+  orderController.receiveOrder,
+);
+
 router.post(
   "/",
   auth,

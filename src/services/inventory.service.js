@@ -215,7 +215,7 @@ export const searchInventory = async (searchTerm) => {
         OR d.department_name ILIKE $1
     ORDER BY t.item_name;
         `,
-    [`%${searchTerm}`],
+    [`%${searchTerm}%`],
   );
 
   return result.rows;

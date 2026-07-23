@@ -75,3 +75,22 @@ export const deleteOrder = async (req, res) => {
     });
   }
 };
+
+export const receiveOrder = async (req, res) => {
+  try {
+    const order = await orderService.receiveOrder(
+      req.params.id,
+      req.user.user_id,
+    );
+
+    res.status(200).json({
+      message: "Order received successfully",
+
+      order,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
